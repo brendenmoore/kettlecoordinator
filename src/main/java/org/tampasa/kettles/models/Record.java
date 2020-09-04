@@ -26,11 +26,11 @@ public class Record{
 
     private String clockOut;
 
-    private Number cash;
+    private String cash;
 
-    private Number coin;
+    private String coin;
 
-    private Number check;
+    private String check;
 
 
     // Constructors
@@ -84,27 +84,27 @@ public class Record{
         this.clockOut = clockOut;
     }
 
-    public Number getCash() {
+    public String getCash() {
         return cash;
     }
 
-    public void setCash(Number cash) {
+    public void setCash(String cash) {
         this.cash = cash;
     }
 
-    public Number getCoin() {
+    public String getCoin() {
         return coin;
     }
 
-    public void setCoin(Number coin) {
+    public void setCoin(String coin) {
         this.coin = coin;
     }
 
-    public Number getCheck() {
+    public String getCheck() {
         return check;
     }
 
-    public void setCheck(Number check) {
+    public void setCheck(String check) {
         this.check = check;
     }
 
