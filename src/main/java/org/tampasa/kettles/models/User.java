@@ -28,8 +28,11 @@ public class User extends AbstractEntity {
     // Constructors
     public User() {}
 
-
-    // Getters and Setters
+    public User(String name, @NotBlank @Email String email) {
+        this.email = email;
+        super.setName(name);
+    }
+// Getters and Setters
 
     public List<Ringer> getRingers() {
         return ringers;
