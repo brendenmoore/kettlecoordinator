@@ -3,7 +3,7 @@ package org.tampasa.kettles.models;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -16,9 +16,9 @@ public class Store extends AbstractEntity{
     @Length(min = 1, max = 5)
     private String symbol;
 
-    private Integer index;
+    private int index;
 
-    @OneToOne
+    @ManyToOne
     private Route route;
 
     // Constructors

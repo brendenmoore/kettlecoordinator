@@ -8,9 +8,9 @@ import java.util.List;
 @Entity
 public class Route extends AbstractEntity{
 
-    private Integer index;
+    private int index;
 
-    private Integer color;
+    private int color;
 
     private String driver;
 
@@ -26,6 +26,14 @@ public class Route extends AbstractEntity{
 
     // Getters and Setters
 
+
+    public List<Store> getStores() {
+        return stores;
+    }
+
+    public void setStores(List<Store> stores) {
+        this.stores = stores;
+    }
 
     public Integer getIndex() {
         return index;
