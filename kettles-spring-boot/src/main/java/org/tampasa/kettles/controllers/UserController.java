@@ -11,8 +11,6 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
-    // standard constructors
-
     @Autowired
     private UserRepository userRepository;
 

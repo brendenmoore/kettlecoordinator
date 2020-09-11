@@ -14,7 +14,7 @@ public class Ringer extends AbstractEntity{
     private String lastName;
 
     @NotBlank
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     @ManyToOne
     private User user;
@@ -43,11 +43,11 @@ public class Ringer extends AbstractEntity{
         this.lastName = lastName;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
