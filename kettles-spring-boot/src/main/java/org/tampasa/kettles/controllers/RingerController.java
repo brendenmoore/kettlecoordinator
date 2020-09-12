@@ -37,8 +37,17 @@ public class RingerController {
     @PutMapping("/ringers/{id}")
     public  ResponseEntity<Object> updateRinger(@PathVariable("id") Integer id, @RequestBody Ringer ringer) {
         ringer.setId(id);
+        // I wouldn't set the id if I'm sending in a ringer object from the front end that already has the id.
+        // In fact it's probably bad practice to even have a setId method.
+        // I wouldn't even need the path variable in that case. Is that okay?
         ringerRepository.save(ringer);
         return new ResponseEntity<>("Ringer has been updated successfully", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/ringers/{id}")
+    public ResponseEntity<Object> deleteRinger(@PathVariable("id") Integer id) {
+        ringerRepository.deleteById(id);
+        return  new ResponseEntity<>("Ringer has been deleted successfully", HttpStatus.OK);
     }
 
 }
