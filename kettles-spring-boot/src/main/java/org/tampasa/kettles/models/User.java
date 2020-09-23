@@ -1,15 +1,23 @@
 package org.tampasa.kettles.models;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class User extends AbstractEntity {
+public class User{
+
+    @Id
+    @GeneratedValue
+    private int id;
+
+    @NotBlank
+    @Length(min = 3, max = 22)
+    private String userName;
 
     @NotBlank
     @Email
@@ -30,7 +38,6 @@ public class User extends AbstractEntity {
 
     public User(String name, @NotBlank @Email String email) {
         this.email = email;
-        super.setName(name);
     }
 // Getters and Setters
 
