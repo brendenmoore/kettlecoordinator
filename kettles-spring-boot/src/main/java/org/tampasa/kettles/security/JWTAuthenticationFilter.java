@@ -2,6 +2,7 @@ package org.tampasa.kettles.security;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -56,6 +57,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withSubject(((User) auth.getPrincipal()).getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
-        res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+        res.setStatus(200);
+        res.setContentType("application/json");
+        res.getWriter().write(new JSONObject()
+                .put("idToken", token)
+                .put("expiresIn", EXPIRATION_TIME)
+                .toString());
+
+//        res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
     }
 }
