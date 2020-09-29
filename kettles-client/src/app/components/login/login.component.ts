@@ -1,38 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  username: string;
-  password: string;
-  errorMessage = 'Invalid Credentials';
-  successMessage: string;
-  invalidLogin = false;
-  loginSuccess = false;
+  form: FormGroup;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: AuthService) {}
+  constructor(private fb:FormBuilder,
+               private authService: AuthService,
+               private router: Router) {
 
-  ngOnInit(): void {
+      this.form = this.fb.group({
+          email: ['',Validators.required],
+          password: ['',Validators.required]
+      });
   }
 
-  handleLogin() {
-    this.authenticationService.authenticationService(this.username, this.password).subscribe((result) => {
-      this.invalidLogin = false;
-      this.loginSuccess = true;
-      this.successMessage = 'Login Successful.';
-      this.router.navigate(['/home']);
-    }, () => {
-      this.invalidLogin = true;
-      this.loginSuccess = false;
-    });
+  login() {
+      const val = this.form.value;
+
+      if (val.email && val.password) {
+          this.authService.login(val.email, val.password)
+              .subscribe(
+                  () => {
+                      console.log("User is logged in");
+                      this.router.navigateByUrl('/');
+                  }
+              );
+      }
   }
 }

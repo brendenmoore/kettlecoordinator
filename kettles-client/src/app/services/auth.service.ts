@@ -1,13 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { User } from '../models/user';
+import {tap, shareReplay} from 'rxjs/internal/operators';
+import * as dayjs from 'dayjs'
+dayjs().format()
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  // BASE_PATH: 'http://localhost:8080'
+  BASE_PATH: 'http://localhost:8080'
+  SIGN_UP_URL = '/users/sign-up'
+  LOGIN_URL = '/login'
   USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 
   public username: String;
@@ -17,38 +22,39 @@ export class AuthService {
 
   }
 
-  authenticationService(username: String, password: String) {
-    return this.http.get(`http://localhost:8080/api/v1/basicauth`,
-      { headers: { authorization: this.createBasicAuthToken(username, password) } }).pipe(map((res) => {
-        this.username = username;
-        this.password = password;
-        this.registerSuccessfulLogin(username, password);
-      }));
+  login(email:string, password:string ) {
+    return this.http.post<User>('/api/login', {email, password})
+      .pipe(
+          tap(res => this.setSession),
+          shareReplay()
+      );
   }
 
-  createBasicAuthToken(username: String, password: String) {
-    return 'Basic ' + window.btoa(username + ":" + password)
-  }
+  private setSession(authResult) {
+      const expiresAt = dayjs().add(authResult.expiresIn,'second');
 
-  registerSuccessfulLogin(username, password) {
-    sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, username)
+      localStorage.setItem('id_token', authResult.idToken);
+      localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
   }
 
   logout() {
-    sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
-    this.username = null;
-    this.password = null;
+      localStorage.removeItem("id_token");
+      localStorage.removeItem("expires_at");
   }
 
-  isUserLoggedIn() {
-    let user = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME)
-    if (user === null) return false
-    return true
+  public isLoggedIn() {
+      return dayjs().isBefore(this.getExpiration());
   }
 
-  getLoggedInUserName() {
-    let user = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME)
-    if (user === null) return ''
-    return user
+  isLoggedOut() {
+      return !this.isLoggedIn();
   }
+
+  getExpiration() {
+      const expiration = localStorage.getItem("expires_at");
+      const expiresAt = JSON.parse(expiration);
+      return dayjs(expiresAt);
+  }
+
 }
+
