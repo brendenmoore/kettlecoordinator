@@ -1,5 +1,7 @@
 package org.tampasa.kettles.models;
 
+import org.tampasa.kettles.user.ApplicationUser;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
@@ -17,7 +19,7 @@ public class Ringer extends AbstractEntity{
     private String phoneNumber;
 
     @ManyToOne
-    private User user;
+    private ApplicationUser applicationUser;
 
     private String notes;
 
