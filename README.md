@@ -34,5 +34,8 @@ Frontend:
 - Creating REST APIs
 - Hosting the database and deploying the frontend using cloud services
 
+### User Stories
+[User Stories Link](https://docs.google.com/document/d/1L_-yorWdI5OCi5Fo3ab7mfZoWJJUjsVqM3X1StGX3js/edit?usp=sharing)
+
 ### Project Tracker
 [Trello Board Link](https://trello.com/b/DY0blRUP/kettles-coordinator-app)
