@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -9,30 +10,40 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  username: string;
-  password: string;
-  errorMessage = 'Invalid Credentials';
-  successMessage: string;
-  invalidRegistration = false;
-  registrationSuccess = false;
+  form: FormGroup;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: AuthService) {}
+  constructor(private fb:FormBuilder,
+               private authService: AuthService,
+               private router: Router) {
+
+      this.form = this.fb.group({
+          username: ['',Validators.required],
+          password: ['',Validators.required]
+      });
+  }
 
   ngOnInit(): void {
   }
 
   handleRegistration() {
-    this.authenticationService.authenticationService(this.username, this.password).subscribe((result) => {
-      this.invalidRegistration = false;
-      this.registrationSuccess = true;
-      this.successMessage = 'Registration Successful.';
-      this.router.navigate(['/home']);
-    }, () => {
-      this.invalidRegistration = true;
-      this.registrationSuccess = false;
-    });
+    const val = this.form.value
+
+    if (val.username && val.password) {
+      this.authService.signUp(val.username, val.password)
+          .subscribe(
+              () => {
+                  console.log("User is signed up");
+                  this.authService.login(val.username, val.password).
+                  subscribe(
+                    () => {
+                      console.log("User is signed in")
+                      this.router.navigateByUrl('/home');
+                    }
+                  )
+              }
+          );
+    }
   }
+
+
 }

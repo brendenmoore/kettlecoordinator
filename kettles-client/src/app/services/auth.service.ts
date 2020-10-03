@@ -10,9 +10,8 @@ dayjs().format()
 })
 export class AuthService {
 
-  BASE_PATH: 'http://localhost:8080'
-  SIGN_UP_URL = '/users/sign-up'
-  LOGIN_URL = '/login'
+  SIGN_UP_URL = 'api/users/sign-up'
+  LOGIN_URL = 'api/login'
   USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 
   public username: String;
@@ -22,8 +21,12 @@ export class AuthService {
 
   }
 
-  login(email:string, password:string ) {
-    return this.http.post<User>('/api/login', {email, password})
+  signUp(username:string, password:string) {
+    return this.http.post<User>(this.SIGN_UP_URL, {username, password})
+  }
+
+  login(username:string, password:string ) {
+    return this.http.post<User>(this.LOGIN_URL, {username, password})
       .pipe(
           tap(res => this.setSession),
           shareReplay()
