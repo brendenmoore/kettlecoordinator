@@ -12,6 +12,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RingersComponent } from './components/ringers/ringers.component';
 import { RingerService } from './services/ringer.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { RingerService } from './services/ringer.service';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     RingerService,
