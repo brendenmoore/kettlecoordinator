@@ -22,4 +22,9 @@ public class UserController {
         applicationUser.setPassword(bCryptPasswordEncoder.encode(applicationUser.getPassword()));
         applicationUserRepository.save(applicationUser);
     }
+
+    @GetMapping("{id}")
+    public ApplicationUser getUserById(@PathVariable Long id) {
+        return applicationUserRepository.findById(id);
+    }
 }

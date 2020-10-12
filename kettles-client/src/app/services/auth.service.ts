@@ -28,7 +28,7 @@ export class AuthService {
   login(username:string, password:string ) {
     return this.http.post<User>(this.LOGIN_URL, {username, password})
       .pipe(
-          tap(res => this.setSession),
+          tap(res => this.setSession(res)),
           shareReplay()
       );
   }

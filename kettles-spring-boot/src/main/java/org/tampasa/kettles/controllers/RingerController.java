@@ -6,40 +6,56 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.tampasa.kettles.models.Ringer;
 import org.tampasa.kettles.models.data.RingerRepository;
+import org.tampasa.kettles.models.dto.RingerDTO;
+import org.tampasa.kettles.user.ApplicationUser;
+import org.tampasa.kettles.user.ApplicationUserRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
 @CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping(path = "/{userId}/ringers")
+@RestController
 public class RingerController {
+
+    @Autowired
+    private ApplicationUserRepository userRepository;
 
     @Autowired
     private RingerRepository ringerRepository;
 
-    @GetMapping("/ringers")
-    public List<Ringer> getRingers() {
-        return (List<Ringer>) ringerRepository.findAll();
+    @GetMapping()
+    public List<Ringer> getAllRingers(@PathVariable("userId") Long userId ) {
+        return (List<Ringer>) userRepository.findById(userId).getRingers();
     }
 
-    @GetMapping("/ringers/{id}")
+    @GetMapping("/{id}")
     public Ringer getRingerById(@PathVariable("id") Integer id) {
         Optional<Ringer> optionalRinger = ringerRepository.findById(id);
         return optionalRinger.orElse(null);
     }
 
-    @PostMapping(path = "/ringers", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> addRinger(@RequestBody Ringer ringer) {
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> addRinger(@PathVariable("userId") Long userId, @RequestBody RingerDTO ringerDTO) {
+        if (!userId.equals(ringerDTO.getUserId())) {
+            return new ResponseEntity<>("Error, ringer not added. User Id doesn't match", HttpStatus.BAD_REQUEST);
+        }
+        if (userRepository.findById(ringerDTO.getUserId()) == null) {
+            return new ResponseEntity<>("Error, ringer not added. User Id does not exist", HttpStatus.BAD_REQUEST);
+        }
+        ApplicationUser user = userRepository.findById(userId);
+        Ringer ringer = new Ringer(ringerDTO.getFirstName(), ringerDTO.getLastName(), user, ringerDTO.getNotes(), ringerDTO.getPhoneNumber());
+        user.addRinger(ringer);
         ringerRepository.save(ringer);
         return new ResponseEntity<>("Ringer has been created successfully", HttpStatus.CREATED);
     }
 
-    @PutMapping("/ringers/{id}")
-    public  ResponseEntity<Object> updateRinger(@PathVariable("id") Integer id, @RequestBody Ringer ringer) {
-        ringer.setId(id);
-        // I wouldn't set the id if I'm sending in a ringer object from the front end that already has the id.
-        // In fact it's probably bad practice to even have a setId method.
-        // I wouldn't even need the path variable in that case. Is that okay?
+    // TODO: use DTO here
+    @PutMapping("/{id}")
+    public  ResponseEntity<Object> updateRinger(@RequestBody Ringer ringer, @PathVariable("id") Integer id) {
+        if (!id.equals(ringer.getId())) {
+            return new ResponseEntity<>("Error, ringer not updated. Id doesn't match", HttpStatus.BAD_REQUEST);
+        }
         ringerRepository.save(ringer);
         return new ResponseEntity<>("Ringer has been updated successfully", HttpStatus.OK);
     }

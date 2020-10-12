@@ -9,6 +9,7 @@
       <a *ngIf="authService.isLoggedOut()" class="nav-link" routerLink="/login">Login</a>
       <a *ngIf="authService.isLoggedOut()" class="nav-link" routerLink="/register">Register</a>
       <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/logout">Logout</a>
+      <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/ringers">Ringers</a>
     </div>
   </div>
 </nav>

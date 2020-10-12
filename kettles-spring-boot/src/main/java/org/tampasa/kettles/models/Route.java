@@ -1,12 +1,19 @@
 package org.tampasa.kettles.models;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Route extends AbstractEntity{
+
+    @NotBlank(message = "Name must not be blank")
+    @Length(min = 1, max = 100, message = "Name must be between 1 and 100 characters")
+    private String name;
 
     private int index;
 

@@ -1,5 +1,6 @@
 package org.tampasa.kettles.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.tampasa.kettles.models.Ringer;
 import org.tampasa.kettles.models.Sheet;
@@ -63,6 +64,14 @@ public class ApplicationUser {
 
     public void setRingers(List<Ringer> ringers) {
         this.ringers = ringers;
+    }
+
+    public void addRinger(Ringer ringer) {
+        this.ringers.add(ringer);
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public List<Sheet> getSheets() {
