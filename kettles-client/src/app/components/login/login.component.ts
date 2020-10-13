@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
 
   form: FormGroup;
+  hide: boolean = true;
 
   constructor(private fb:FormBuilder,
                private authService: AuthService,

@@ -11,6 +11,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class RegistrationComponent implements OnInit {
 
   form: FormGroup;
+  hide: boolean = true;
 
   constructor(private fb:FormBuilder,
                private authService: AuthService,
