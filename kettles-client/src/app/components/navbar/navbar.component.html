@@ -1,5 +1,5 @@
 <!-- User is Logged Out -->
-<mat-toolbar *ngIf="authService.isLoggedOut()">
+<mat-toolbar color="primary" *ngIf="authService.isLoggedOut()">
     <span>Kettle Coordinator</span>
 
     <span class="spacer"></span>
@@ -9,7 +9,7 @@
 </mat-toolbar>
 
 <!-- User is Logged In -->
-<mat-toolbar *ngIf="authService.isLoggedIn()">
+<mat-toolbar color="primary" *ngIf="authService.isLoggedIn()">
     <div>Kettle Coordinator</div>
 
     <button mat-button routerLink="/home">Home</button>
