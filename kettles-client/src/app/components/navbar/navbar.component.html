@@ -1,15 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Kettle Coordinator</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-link" routerLink="/home">Home</a>
-      <a *ngIf="authService.isLoggedOut()" class="nav-link" routerLink="/login">Login</a>
-      <a *ngIf="authService.isLoggedOut()" class="nav-link" routerLink="/register">Register</a>
-      <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/logout">Logout</a>
-      <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/ringers">Ringers</a>
-    </div>
-  </div>
-</nav>
+<!-- User is Logged Out -->
+<mat-toolbar *ngIf="authService.isLoggedOut()">
+    <span>Kettle Coordinator</span>
+
+    <span class="spacer"></span>
+
+    <button mat-button routerLink="/login">Login</button>
+    <button mat-button routerLink="/register">Register</button>
+</mat-toolbar>
+
+<!-- User is Logged In -->
+<mat-toolbar *ngIf="authService.isLoggedIn()">
+    <div>Kettle Coordinator</div>
+
+    <button mat-button routerLink="/home">Home</button>
+    <button mat-button routerLink="/home">Today</button>
+    <button mat-button routerLink="/sheets">Sheets</button>
+    <button mat-button routerLink="/ringers">Ringers</button>
+    <button mat-button routerLink="/routes">Routes</button>
+
+    <span class="spacer"></span>
+
+    <button mat-button routerLink="/logout">Logout</button>
+ </mat-toolbar>

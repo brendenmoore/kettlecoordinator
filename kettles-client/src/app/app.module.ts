@@ -13,6 +13,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { RingersComponent } from './components/ringers/ringers.component';
 import { RingerService } from './services/ringer.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatIconModule} from '@angular/material/icon';
+import { LogoutComponent } from './components/logout/logout.component';
+
+
+
 
 
 @NgModule({
@@ -23,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegistrationComponent,
     NavbarComponent,
     RingersComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +39,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatAutocompleteModule,
+    MatIconModule
   ],
   providers: [
     RingerService,
