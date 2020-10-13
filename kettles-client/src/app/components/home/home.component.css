@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  margin-top: 50px;
+  align-content: center;
+  justify-content: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.spacer {
+  padding-top: 10px;
+}
