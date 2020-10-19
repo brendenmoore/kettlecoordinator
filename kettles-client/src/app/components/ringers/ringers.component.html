@@ -1,7 +1,35 @@
-<p>ringers works!</p>
-<ul>
-  <li *ngFor="let ringer of ringers">
-    <div><span>{{ringer.firstName}}</span>{{ringer.lastName}}</div>
-    <div>{{ringer.phoneNumber}}</div>
-  </li>
-</ul>
+
+
+<mat-drawer-container>
+  <mat-drawer #drawer class="example-sidenav" mode="side" *ngIf="selected">
+    <h2>{{selected.firstName + " " + selected.lastName}}</h2>
+    <p>Phone Number: {{selected.phoneNumber}}</p>
+    <p>Other Information</p>
+    <button>Edit</button>
+  </mat-drawer>
+
+  <div class="container">
+
+    <h1 class="py-3">Ringers</h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Phone Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ringer of ringers" (click)="selected = ringer; drawer.toggle();">
+          <td>{{ringer.firstName}}</td>
+          <td>{{ringer.lastName}}</td>
+          <td>{{ringer.phoneNumber}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
+</mat-drawer-container>

@@ -1,0 +1,12 @@
+
+.example-sidenav-content {
+  display: flex;
+  min-height: 95vh;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: column;
+}
+
+.example-sidenav {
+  padding: 20px;
+}

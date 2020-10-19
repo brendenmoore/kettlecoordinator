@@ -23,6 +23,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCardModule} from '@angular/material/card';
+import { AddRingerComponent } from './components/add-ringer/add-ringer.component';
+import { EditRingerComponent } from './components/edit-ringer/edit-ringer.component';
 
 
 
@@ -37,6 +39,8 @@ import {MatCardModule} from '@angular/material/card';
     NavbarComponent,
     RingersComponent,
     LogoutComponent,
+    AddRingerComponent,
+    EditRingerComponent,
   ],
   imports: [
     BrowserModule,

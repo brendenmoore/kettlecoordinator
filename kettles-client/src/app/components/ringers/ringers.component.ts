@@ -10,6 +10,8 @@ import { RingerService } from 'src/app/services/ringer.service';
 export class RingersComponent implements OnInit {
 
   ringers: Ringer[] = [];
+  columnsToDisplay: string[] = ['firstName', 'lastName'];
+  selected: Ringer = null;
 
   constructor(public ringerService: RingerService) { }
 
@@ -22,5 +24,6 @@ export class RingersComponent implements OnInit {
       this.ringers.push(...res);
     })
   }
+
 
 }
