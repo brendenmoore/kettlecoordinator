@@ -18,4 +18,8 @@ export class RingerService {
     return this.http.get<Ringer[]>("api/1/ringers");
   }
 
+  public add(ringer: Ringer) {
+    return this.http.post<Ringer>("api/1/ringers", ringer);
+  }
+
 }

@@ -5,12 +5,14 @@
     <h2>{{selected.firstName + " " + selected.lastName}}</h2>
     <p>Phone Number: {{selected.phoneNumber}}</p>
     <p>Other Information</p>
-    <button>Edit</button>
+    <button type="button" class="btn btn-light">Edit</button>
   </mat-drawer>
 
   <div class="container">
 
-    <h1 class="py-3">Ringers</h1>
+    <h1 class="my-3">Ringers</h1>
+
+    <button type="button" class="btn btn-primary mb-3" routerLink="/ringers/new">Add Ringer</button>
 
     <table class="table">
       <thead>
