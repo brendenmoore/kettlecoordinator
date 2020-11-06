@@ -9,4 +9,8 @@ export class Ringer {
   phoneNumber: string;
   applicationUser: User;
   notes: string;
+
+  getFullName(): string {
+    return this.firstName + " " + this.lastName;
+  }
 }
