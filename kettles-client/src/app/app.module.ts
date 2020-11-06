@@ -25,6 +25,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCardModule} from '@angular/material/card';
 import { AddRingerComponent } from './components/add-ringer/add-ringer.component';
 import { EditRingerComponent } from './components/edit-ringer/edit-ringer.component';
+import { SheetComponent } from './components/sheet/sheet.component';
+import { RingerSignInComponent } from './components/ringer-sign-in/ringer-sign-in.component';
 
 
 
@@ -41,6 +43,8 @@ import { EditRingerComponent } from './components/edit-ringer/edit-ringer.compon
     LogoutComponent,
     AddRingerComponent,
     EditRingerComponent,
+    SheetComponent,
+    RingerSignInComponent,
   ],
   imports: [
     BrowserModule,

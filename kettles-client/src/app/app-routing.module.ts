@@ -6,6 +6,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { RingersComponent } from './components/ringers/ringers.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { AddRingerComponent } from './components/add-ringer/add-ringer.component';
+import { SheetComponent } from './components/sheet/sheet.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'ringers', component: RingersComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'ringers/new', component: AddRingerComponent}
+  {path: 'ringers/new', component: AddRingerComponent},
+  {path: 'sheet', component: SheetComponent}
 ];
 
 @NgModule({
