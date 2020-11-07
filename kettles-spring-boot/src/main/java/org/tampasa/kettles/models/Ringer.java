@@ -18,6 +18,8 @@ public class Ringer extends AbstractEntity{
 
     private String phoneNumber;
 
+    private String fullName;
+
     @ManyToOne
     private ApplicationUser applicationUser;
 
@@ -30,6 +32,7 @@ public class Ringer extends AbstractEntity{
     public Ringer(@NotBlank String firstName, @NotBlank String lastName, ApplicationUser applicationUser, String notes, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.fullName = firstName + " " + lastName;
         this.applicationUser = applicationUser;
         this.notes = notes;
         this.phoneNumber = phoneNumber;
@@ -37,12 +40,21 @@ public class Ringer extends AbstractEntity{
 
     //Getters and Setters
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void updateFullName() {
+        this.fullName = this.firstName + " " + this.lastName;
+    }
+
     public String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+        this.updateFullName();
     }
 
     public String getLastName() {
@@ -51,6 +63,7 @@ public class Ringer extends AbstractEntity{
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+        this.updateFullName();
     }
 
     public String getPhoneNumber() {

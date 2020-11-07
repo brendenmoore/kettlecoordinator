@@ -25,7 +25,6 @@ export class AddRingerComponent implements OnInit {
 
   submitForm() {
     this.ringer.userId = 1;
-    console.log("clicked")
     this.ringerService.add(this.ringer)
       .subscribe(
         () => {
@@ -33,6 +32,7 @@ export class AddRingerComponent implements OnInit {
             this.router.navigateByUrl('/ringers');
         }
       );
+    this.router.navigateByUrl('/ringers');
   }
 
 }

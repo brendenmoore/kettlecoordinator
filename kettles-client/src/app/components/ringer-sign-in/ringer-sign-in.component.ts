@@ -21,10 +21,10 @@ export class RingerSignInComponent implements OnInit {
   constructor(public ringerService: RingerService) { }
 
   ngOnInit() {
-    this.getRingers();
+    this.getRingers();;
     this.filteredOptions = this.form.valueChanges.pipe(
       startWith(''),
-      map(value => typeof value === 'string' ? value : value.getFullName()),
+      map(value => typeof value === 'string' ? value : value.fullName),
       map(name => name ? this._filter(name) : this.ringers.slice())
     );
 
@@ -32,37 +32,26 @@ export class RingerSignInComponent implements OnInit {
   }
 
   getRingers(){
-    // this.ringerService.findAll().subscribe(res => {
-    //   this.ringers.push(...res);
-    // });
-    let newRinger: Ringer = new Ringer();
-    newRinger.firstName = "Test";
-    newRinger.lastName = "FullName";
-
-    let newRinger2: Ringer = new Ringer();
-    newRinger2.firstName = "Brenden";
-    newRinger2.lastName = "Moore";
-
-    this.ringers.push(newRinger);
-    this.ringers.push(newRinger2);
+    this.ringerService.findAll().subscribe(res => {
+      this.ringers = res;
+      console.log(res);
+    });
   }
 
   displayFn(ringer: Ringer): string {
-    return ringer && ringer.getFullName() ? ringer.getFullName() : '';
+    return ringer && ringer.fullName ? ringer.fullName : '';
   }
 
   private _filter(value: string): Ringer[] {
     const filterValue = value.toLowerCase();
 
-
-    return this.ringers.filter(ringer => ringer.getFullName().toLowerCase().includes(filterValue));
+    return this.ringers.filter(ringer => ringer.fullName.toLowerCase().includes(filterValue));
   }
-
-  @ViewChild("search") searchField: ElementRef
   addSignIn() {
-    const ringer = this.form.value;
-    this.signIns.push(ringer);
-    this.form.reset("");
-    this.searchField.nativeElement.focus();
+    if(typeof this.form.value !== 'string') {
+      const ringer = this.form.value;
+      this.signIns.push(ringer);
+      this.form.reset("");
+    }
   }
 }
