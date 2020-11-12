@@ -1,0 +1,53 @@
+[
+  {
+    "id": 1,
+    "stores": [
+      {
+        "id": 1,
+        "name": "Walmart",
+        "address": "123 Cherry Tree Lane",
+        "symbol": "B1",
+        "index": 1,
+        "routeId": 1
+      },
+      {
+        "id": 2,
+        "name": "Publix",
+        "address": "Another Address",
+        "symbol": "B2",
+        "index": 2,
+        "routeId": 1
+      }
+    ],
+    "routes": [
+      {
+        "id": 1,
+        "index": 1,
+        "name": "Blue",
+        "color": 1,
+        "storeIds": [1, 2]
+      },
+      {
+        "id": 2,
+        "index": 2,
+        "name": "Red",
+        "color": 2,
+        "storeIds":[]
+      }
+    ],
+    "date": "November 21st, 2020",
+    "onCall": "Brenden",
+    "records": [
+      {
+        "id": 1,
+        "ringerId": 1,
+        "storeId": 1,
+        "clockIn": "",
+        "clockOut": "",
+        "cash": "",
+        "coin": "",
+        "check": ""
+      }
+    ]
+  }
+]
