@@ -1,4 +1,5 @@
 import { Store } from '../models/store.model';
+import { mockRingers } from './ringers';
 
 export let mockStores: Store[] = [
     {
@@ -6,8 +7,8 @@ export let mockStores: Store[] = [
     name: "Walmart",
     address: "123 Cherry Tree Lane",
     symbol: "B1",
-    index: 1
-
+    index: 1,
+    ringer: mockRingers[0]
   },
   {
     id: 2,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { mockRecords } from 'src/app/mock-data/records';
 import { mockStores } from 'src/app/mock-data/stores';
+import { Ringer } from 'src/app/models/ringer';
 import { Store } from 'src/app/models/store.model';
 
 @Component({
@@ -21,6 +22,10 @@ export class SheetComponent implements OnInit {
 
   onSelectStore(store: Store) {
     this.selectedStore === store ? this.selectedStore = null : this.selectedStore = store;
+  }
+
+  onRingerSelected(ringer: Ringer){
+    this.selectedStore.ringer = ringer;
   }
 
 }

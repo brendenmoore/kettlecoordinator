@@ -1,7 +1,5 @@
-import { Component, ElementRef, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
-import { EventEmitter } from 'events';
 import { Observable } from 'rxjs';
 import { startWith, map,} from 'rxjs/internal/operators';
 import { mockRingers } from 'src/app/mock-data/ringers';
@@ -21,7 +19,7 @@ export class RingerSignInComponent implements OnInit {
   filteredOptions: Observable<Ringer[]>;
   signIns: Ringer[] = [];
   @Input() selectedStore: Store;
-  @Output() selectedRinger = new EventEmitter()
+  @Output() ringerSelected = new EventEmitter<Ringer>();
 
   constructor(public ringerService: RingerService) { }
 
@@ -63,6 +61,6 @@ export class RingerSignInComponent implements OnInit {
   }
 
   onSelectRinger(ringer: Ringer) {
-
+    this.ringerSelected.emit(ringer);
   }
 }

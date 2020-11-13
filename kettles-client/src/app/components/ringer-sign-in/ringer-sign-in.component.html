@@ -22,9 +22,15 @@
   </button>
 </form>
 
+<!-- temp -->
+<p *ngIf="selectedStore">Selected Store: {{selectedStore.symbol}}</p>
+
 <h2 class="mt-2">Signed In:</h2>
 <table class="table" *ngIf="ringers">
-  <tr *ngFor="let ringer of signIns" [ngClass]="{'unassigned': !ringer.assigned, 'assigned': ringer.assigned}">
+  <tr *ngFor="let ringer of signIns"
+    [ngClass]="{'unassigned': !ringer.assigned, 'assigned': ringer.assigned}"
+    (click)="onSelectRinger(ringer)"
+  >
     <td>{{ringer.fullName}}</td>
     <td>{{ringer.phoneNumber}}</td>
   </tr>

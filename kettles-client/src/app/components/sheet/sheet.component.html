@@ -1,7 +1,10 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-4 col-md-3 col-lg-2 sidebar">
-      <app-ringer-sign-in selectedStore="selectedStore"></app-ringer-sign-in>
+      <app-ringer-sign-in
+        [selectedStore]="selectedStore"
+        (ringerSelected)="onRingerSelected($event)"
+      ></app-ringer-sign-in>
     </div>
     <div class="col">
       <h1 class="text-center mt-2">Sign in Sheet</h1>
@@ -19,7 +22,10 @@
             <td>{{store.name}}</td>
             <td>{{store.address}}</td>
             <td *ngIf="store.ringer">{{store.ringer.fullName}}</td>
-            <td *ngIf="!store.ringer" [ngClass]="{'selectedRow': store === selectedStore}" class="highlight" (click)="onSelectStore(store)">Ringer goes here</td>
+            <td *ngIf="!store.ringer"
+              [ngClass]="{'selectedRow': store === selectedStore}" class="highlight"
+              (click)="onSelectStore(store)">Ringer goes here
+            </td>
           </tr>
         </tbody>
       </table>
