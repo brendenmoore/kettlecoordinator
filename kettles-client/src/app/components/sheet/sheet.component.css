@@ -6,6 +6,15 @@
 
 .highlight{
   background-color: blanchedalmond;
+  cursor: pointer;
+}
+
+.highlight:hover{
+  background-color: rgb(241, 226, 199);
+}
+
+.highlight:active{
+  background-color: rgb(250, 240, 225);
 }
 
 table {
@@ -13,9 +22,9 @@ table {
 }
 
 .blue {
-  background-color: rgb(139, 159, 219);
+  background-color: rgb(139, 194, 219);
 }
 
 .selectedRow {
-  background-color: skyblue;
+  background-color: rgb(201, 218, 180);
 }
