@@ -1,9 +1,12 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { EventEmitter } from 'events';
 import { Observable } from 'rxjs';
 import { startWith, map,} from 'rxjs/internal/operators';
+import { mockRingers } from 'src/app/mock-data/ringers';
 import { Ringer } from 'src/app/models/ringer';
+import { Store } from 'src/app/models/store.model';
 import { RingerService } from 'src/app/services/ringer.service';
 
 @Component({
@@ -17,11 +20,14 @@ export class RingerSignInComponent implements OnInit {
   ringers: Ringer[] = [];
   filteredOptions: Observable<Ringer[]>;
   signIns: Ringer[] = [];
+  @Input() selectedStore: Store;
+  @Output() selectedRinger = new EventEmitter()
 
   constructor(public ringerService: RingerService) { }
 
   ngOnInit() {
-    this.getRingers();;
+    // this.getRingers();;
+    this.ringers = mockRingers;
     this.filteredOptions = this.form.valueChanges.pipe(
       startWith(''),
       map(value => typeof value === 'string' ? value : value.fullName),
@@ -49,9 +55,14 @@ export class RingerSignInComponent implements OnInit {
   }
   addSignIn() {
     if(typeof this.form.value !== 'string') {
-      const ringer = this.form.value;
+      const ringer = {... this.form.value};
+      ringer.assigned = false;
       this.signIns.push(ringer);
       this.form.reset("");
     }
+  }
+
+  onSelectRinger(ringer: Ringer) {
+
   }
 }

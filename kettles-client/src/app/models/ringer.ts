@@ -7,6 +7,6 @@ export class Ringer {
   firstName: string;
   lastName: string;
   phoneNumber: string;
-  applicationUser: User;
   notes: string;
+  assigned: boolean;
 }

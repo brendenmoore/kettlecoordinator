@@ -1,10 +1,28 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-2 color">
-      <app-ringer-sign-in></app-ringer-sign-in>
+    <div class="col-4 col-md-3 col-lg-2 sidebar">
+      <app-ringer-sign-in selectedStore="selectedStore"></app-ringer-sign-in>
     </div>
-    <div class="col-sm-10">
-      <h1 class="text-center">Sign in Sheet</h1>
+    <div class="col">
+      <h1 class="text-center mt-2">Sign in Sheet</h1>
+      <table class="table">
+        <thead>
+          <th scope="col">Id</th>
+          <th scope="col">Store</th>
+          <th scope="col">Location</th>
+          <th scope="col">Ringer</th>
+        </thead>
+        <tbody *ngIf="stores">
+          <tr *ngFor="let store of stores" >
+            <!-- temp class - should be dynamic -->
+            <td class="blue">{{store.symbol}}</td>
+            <td>{{store.name}}</td>
+            <td>{{store.address}}</td>
+            <td *ngIf="store.ringer">{{store.ringer.fullName}}</td>
+            <td *ngIf="!store.ringer" [ngClass]="{'selectedRow': store === selectedStore}" class="highlight" (click)="onSelectStore(store)">Ringer goes here</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

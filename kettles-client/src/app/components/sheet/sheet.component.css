@@ -1,3 +1,21 @@
-.color {
+.sidebar {
   background-color: white;
+  height: calc(100vh - 64px);
+  min-width: 200px;
+}
+
+.highlight{
+  background-color: blanchedalmond;
+}
+
+table {
+  background-color: white;
+}
+
+.blue {
+  background-color: rgb(139, 159, 219);
+}
+
+.selectedRow {
+  background-color: skyblue;
 }

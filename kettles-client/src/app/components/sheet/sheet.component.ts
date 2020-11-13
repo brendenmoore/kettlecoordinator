@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { mockRecords } from 'src/app/mock-data/records';
+import { mockStores } from 'src/app/mock-data/stores';
+import { Store } from 'src/app/models/store.model';
 
 @Component({
   selector: 'app-sheet',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SheetComponent implements OnInit {
 
+  stores = mockStores;
+  records = mockRecords;
+  selectedStore: Store = null;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSelectStore(store: Store) {
+    this.selectedStore === store ? this.selectedStore = null : this.selectedStore = store;
   }
 
 }

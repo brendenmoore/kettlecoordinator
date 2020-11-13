@@ -1,12 +1,12 @@
 import { Route } from '../models/route.model';
-import { stores } from './stores';
+import { mockStores } from './stores';
 
-export let routes: Route[] =  [
+export let mockRoutes: Route[] =  [
   {
     "id": 1,
     "name": "Blue",
     "color": 1,
-    "stores": [stores[0], stores[1]]
+    "stores": mockStores
   },
   {
     "id": 2,

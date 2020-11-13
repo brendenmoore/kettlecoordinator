@@ -1,10 +1,16 @@
 .example-form {
-  min-width: 50px;
-  max-width: 500px;
-  width: 100%;
+  /* width: 100%; */
   display: flex;
 }
 
-.example-full-width {
-  width: 100%;
+.full-width {
+  max-width: 80%;
+}
+
+.unassigned {
+  background-color: blanchedalmond;
+}
+
+.assigned {
+  background-color: white;
 }

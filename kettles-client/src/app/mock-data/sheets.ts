@@ -1,6 +1,6 @@
 import { Sheet } from '../models/sheet.model';
-import { records } from './records';
-import { routes } from './routes';
+import { mockRecords } from './records';
+import { mockRoutes } from './routes';
 
 export let sheets: Sheet[] = [
   {
@@ -8,7 +8,7 @@ export let sheets: Sheet[] = [
     date: "November 11th, 2020",
     onCall: "Brenden",
     isCurrent: true,
-    routes: [routes[0]],
-    records: [records[0]]
+    routes: [mockRoutes[0]],
+    records: [mockRecords[0]]
   }
 ]
