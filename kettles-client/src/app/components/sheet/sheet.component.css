@@ -1,7 +1,18 @@
 .sidebar {
   background-color: white;
-  height: calc(100vh - 64px);
-  min-width: 200px;
+  /* height: calc(100vh - 64px); */
+  width: 256px;
+  position: fixed;
+  top: 65px;
+  bottom: 0;
+}
+
+.main {
+  position: fixed;
+  top: 65px;
+  left: 256px;
+  bottom: 0;
+  right: 0;
 }
 
 .highlight{

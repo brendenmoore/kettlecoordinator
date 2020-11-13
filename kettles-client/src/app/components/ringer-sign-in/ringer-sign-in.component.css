@@ -14,3 +14,23 @@
 .assigned {
   background-color: white;
 }
+
+.unassigned{
+  background-color: blanchedalmond;
+  cursor: pointer;
+}
+
+.unassigned:hover{
+  background-color: rgb(241, 226, 199);
+}
+
+.unassigned:active{
+  background-color: rgb(250, 240, 225);
+}
+.scrollable {
+  position: fixed;
+  top: 120px;
+  bottom: 5px;
+  width: 226px;
+  overflow-y: auto;
+}

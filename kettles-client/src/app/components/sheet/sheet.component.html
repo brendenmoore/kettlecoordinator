@@ -1,12 +1,11 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-4 col-md-3 col-lg-2 sidebar">
+<div>
+  <div class="container sidebar">
       <app-ringer-sign-in
         [selectedStore]="selectedStore"
         (ringerSelected)="onRingerSelected($event)"
       ></app-ringer-sign-in>
     </div>
-    <div class="col">
+    <div class="container main">
       <h1 class="text-center mt-2">Sign in Sheet</h1>
       <table class="table">
         <thead>
@@ -29,7 +28,8 @@
           </tr>
         </tbody>
       </table>
-    </div>
   </div>
 </div>
+
+
 

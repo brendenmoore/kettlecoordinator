@@ -61,6 +61,9 @@ export class RingerSignInComponent implements OnInit {
   }
 
   onSelectRinger(ringer: Ringer) {
-    this.ringerSelected.emit(ringer);
+    if (this.selectedStore) {
+      this.ringerSelected.emit(ringer);
+      ringer.assigned = true;
+    }
   }
 }
