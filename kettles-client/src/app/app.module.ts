@@ -27,6 +27,7 @@ import { AddRingerComponent } from './components/add-ringer/add-ringer.component
 import { EditRingerComponent } from './components/edit-ringer/edit-ringer.component';
 import { SheetComponent } from './components/sheet/sheet.component';
 import { RingerSignInComponent } from './components/ringer-sign-in/ringer-sign-in.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -61,7 +62,8 @@ import { RingerSignInComponent } from './components/ringer-sign-in/ringer-sign-i
     MatInputModule,
     MatTableModule,
     MatSidenavModule,
-    MatCardModule
+    MatCardModule,
+    NgbModule
   ],
   providers: [
     RingerService,
