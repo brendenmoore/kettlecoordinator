@@ -1,13 +1,11 @@
 <div>
   <div class="container sidebar">
       <app-ringer-sign-in
-        [selectedStore]="selectedStore"
-        (ringerSelected)="onRingerSelected($event)"
       ></app-ringer-sign-in>
     </div>
     <div class="container main">
       <h1 class="text-center mt-2">Sign in Sheet</h1>
-      <table class="table">
+      <table class="table table-sm">
         <thead>
           <th scope="col">Id</th>
           <th scope="col">Store</th>
@@ -25,14 +23,24 @@
               [ngClass]="{'selectedRow': store === selectedStore}" class="highlight"
               (click)="onSelectStore(store)">Ringer goes here
             </td> -->
-            <td>
+            <td width="200px">
               <div ngbDropdown container="body">
-                <button ngbDropdownToggle class="btn btn-light btn-sm">{{store.ringer ? store.ringer.fullName : "Select Ringer"}}</button>
+                <button ngbDropdownToggle class="btn btn-light btn-sm btn-block text-left" [ngClass]="{highlight: !store.ringer}">{{store.ringer ? store.ringer.fullName : "Select Ringer"}}</button>
                 <div ngbDropdownMenu >
+
+                  <div *ngIf="store.ringer">
+                    <button class="text-danger" ngbDropdownItem (click)="onRemoveRinger(store)">Remove Ringer</button>
+                    <div class="dropdown-divider"></div>
+                  </div>
+
                   <div class="p-1">
                     <input class="form-control" type="text" [(ngModel)]="formValue" placeholder="Filter" (keyup)="onFilter()"/>
                   </div>
-                  <button *ngFor="let ringer of filteredRingers" ngbDropdownItem>{{ringer.fullName}}</button>
+                  <button *ngFor="let ringer of filteredRingers"
+                  (click)="onRingerSelected(ringer, store)"
+                  ngbDropdownItem>
+                    {{ringer.fullName}}
+                  </button>
                 </div>
               </div>
             </td>

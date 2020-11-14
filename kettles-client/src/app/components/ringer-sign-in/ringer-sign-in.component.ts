@@ -59,11 +59,4 @@ export class RingerSignInComponent implements OnInit {
       this.form.reset("");
     }
   }
-
-  onSelectRinger(ringer: Ringer) {
-    if (this.selectedStore) {
-      this.ringerSelected.emit(ringer);
-      ringer.assigned = true;
-    }
-  }
 }

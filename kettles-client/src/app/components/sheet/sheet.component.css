@@ -17,15 +17,6 @@
 
 .highlight{
   background-color: blanchedalmond;
-  cursor: pointer;
-}
-
-.highlight:hover{
-  background-color: rgb(241, 226, 199);
-}
-
-.highlight:active{
-  background-color: rgb(250, 240, 225);
 }
 
 table {
@@ -38,4 +29,10 @@ table {
 
 .selectedRow {
   background-color: rgb(201, 218, 180);
+}
+
+.dropdown-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -29,12 +29,14 @@ export class SheetComponent implements OnInit {
     this.filteredRingers = mockRingers;
   }
 
-  onSelectStore(store: Store) {
-    this.selectedStore === store ? this.selectedStore = null : this.selectedStore = store;
+  onRingerSelected(ringer: Ringer, store: Store){
+    store.ringer = ringer;
+    this.formValue = '';
+    this.onFilter();
   }
 
-  onRingerSelected(ringer: Ringer){
-    this.selectedStore.ringer = ringer;
+  onRemoveRinger(store: Store){
+    store.ringer = null;
   }
 
   onFilter(){

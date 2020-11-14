@@ -41,4 +41,14 @@ export let mockRingers: Ringer[] = [
     notes: "",
     assigned: null
   },
+  {
+    id: 4,
+    userId: 1,
+    fullName: "A Longer Name Goes Here",
+    firstName: "A Longer",
+    lastName: "Name Goes Here",
+    phoneNumber: "987654321",
+    notes: "",
+    assigned: null
+  },
 ]
