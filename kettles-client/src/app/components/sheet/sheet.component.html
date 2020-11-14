@@ -20,10 +20,21 @@
             <td class="blue">{{store.symbol}}</td>
             <td>{{store.name}}</td>
             <td>{{store.address}}</td>
-            <td *ngIf="store.ringer">{{store.ringer.fullName}}</td>
+            <!-- <td *ngIf="store.ringer">{{store.ringer.fullName}}</td>
             <td *ngIf="!store.ringer"
               [ngClass]="{'selectedRow': store === selectedStore}" class="highlight"
               (click)="onSelectStore(store)">Ringer goes here
+            </td> -->
+            <td>
+              <div ngbDropdown container="body">
+                <button ngbDropdownToggle class="btn btn-light btn-sm">{{store.ringer ? store.ringer.fullName : "Select Ringer"}}</button>
+                <div ngbDropdownMenu >
+                  <div class="p-1">
+                    <input class="form-control" type="text" [(ngModel)]="formValue" placeholder="Filter" (keyup)="onFilter()"/>
+                  </div>
+                  <button *ngFor="let ringer of filteredRingers" ngbDropdownItem>{{ringer.fullName}}</button>
+                </div>
+              </div>
             </td>
           </tr>
         </tbody>
