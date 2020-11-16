@@ -1,4 +1,4 @@
-import { Ringer } from './ringer';
+import { Ringer } from './ringer.model';
 import { Sheet } from './sheet.model';
 import { Store } from './store.model';
 

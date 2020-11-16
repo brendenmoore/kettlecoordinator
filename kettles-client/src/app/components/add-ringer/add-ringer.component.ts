@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Ringer } from 'src/app/models/ringer';
+import { Ringer } from 'src/app/models/ringer.model';
 import { RingerService } from 'src/app/services/ringer.service';
 
 @Component({
@@ -24,7 +24,6 @@ export class AddRingerComponent implements OnInit {
   }
 
   submitForm() {
-    this.ringer.userId = 1;
     this.ringerService.add(this.ringer)
       .subscribe(
         () => {

@@ -3,7 +3,8 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map,} from 'rxjs/internal/operators';
 import { mockRingers } from 'src/app/mock-data/ringers';
-import { Ringer } from 'src/app/models/ringer';
+import { Ringer } from 'src/app/models/ringer.model';
+import { SignIn } from 'src/app/models/signIn.model';
 import { Store } from 'src/app/models/store.model';
 import { RingerService } from 'src/app/services/ringer.service';
 
@@ -17,7 +18,7 @@ export class RingerSignInComponent implements OnInit {
   form = new FormControl();
   ringers: Ringer[] = [];
   filteredOptions: Observable<Ringer[]>;
-  signIns: Ringer[] = [];
+  signIns: SignIn[] = [];
   @Input() selectedStore: Store;
   @Output() ringerSelected = new EventEmitter<Ringer>();
 
@@ -54,8 +55,7 @@ export class RingerSignInComponent implements OnInit {
   addSignIn() {
     if(typeof this.form.value !== 'string') {
       const ringer = {... this.form.value};
-      ringer.assigned = false;
-      this.signIns.push(ringer);
+      this.signIns.push(new SignIn(ringer));
       this.form.reset("");
     }
   }

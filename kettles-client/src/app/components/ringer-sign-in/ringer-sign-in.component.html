@@ -24,11 +24,11 @@
 
 
 <div class="scrollable">
-  <table class="table" *ngIf="ringers">
-    <tr *ngFor="let ringer of signIns"
-      [ngClass]="{'unassigned': !ringer.assigned, 'assigned': ringer.assigned}"
+  <table class="table" *ngIf="signIns">
+    <tr *ngFor="let signIn of signIns"
+      [ngClass]="{'unassigned': !signIn.isAssigned, 'assigned': signIn.isAssigned}"
     >
-      <td>{{ringer.fullName}}</td>
+      <td>{{signIn.ringer.fullName}}</td>
 
     </tr>
   </table>

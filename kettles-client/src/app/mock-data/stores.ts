@@ -8,7 +8,6 @@ export let mockStores: Store[] = [
     address: "123 Cherry Tree Lane",
     symbol: "B1",
     index: 1,
-    ringer: mockRingers[0]
   },
   {
     id: 2,
@@ -48,6 +47,5 @@ export let mockStores: Store[] = [
     address: "address test here",
     symbol: "B6",
     index: 3
-
   },
 ]

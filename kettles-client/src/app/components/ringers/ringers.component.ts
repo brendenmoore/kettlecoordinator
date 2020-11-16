@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Ringer } from 'src/app/models/ringer';
+import { Ringer } from 'src/app/models/ringer.model';
 import { RingerService } from 'src/app/services/ringer.service';
 
 @Component({

@@ -1,4 +1,4 @@
-import { Ringer } from './ringer';
+import { Ringer } from './ringer.model';
 
 export class Store {
   id: number;

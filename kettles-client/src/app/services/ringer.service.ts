@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Ringer } from '../models/ringer';
+import { Ringer } from '../models/ringer.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
