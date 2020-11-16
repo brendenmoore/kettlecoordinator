@@ -14,8 +14,8 @@
           <th scope="col">Type</th>
           <th scope="col">Ringer</th>
         </thead>
-        <tbody *ngIf="sheet.sheetLocations">
-          <tr *ngFor="let store of sheet.sheetLocations" >
+        <tbody *ngIf="activeLocations">
+          <tr *ngFor="let store of activeLocations" >
             <!-- temp class - should be dynamic -->
             <td class="blue">{{store.storeCode}}</td>
             <td>{{store.storeName}}</td>
@@ -25,21 +25,29 @@
 
             <td width="200px">
               <div ngbDropdown container="body" (openChange)="$event ? null : resetFilter();">
-                <button ngbDropdownToggle class="btn btn-light btn-sm btn-block text-left" [ngClass]="{highlight: !store.ringer}">{{store.ringer ? store.ringer.fullName : "Select Ringer"}}</button>
+                <button ngbDropdownToggle class="btn btn-light btn-sm btn-block text-left" [ngClass]="{highlight: !store.signIn}">{{store.signIn ? store.signIn.ringer.fullName : "Select Ringer"}}</button>
                 <div ngbDropdownMenu >
 
-                  <div *ngIf="store.ringer">
+                  <div *ngIf="store.signIn">
                     <button class="text-danger" ngbDropdownItem (click)="onRemoveRinger(store)">Remove Ringer</button>
                     <div class="dropdown-divider"></div>
                   </div>
 
-                  <div class="p-1">
-                    <input #searchInput class="form-control" type="text" [(ngModel)]="formValue" placeholder="Filter" (keyup)="onFilter()"/>
+                  <div *ngIf="sheet.signIns.length === 0">
+                    <p class="text-warning p-3">No ringers signed in</p>
                   </div>
-                  <button *ngFor="let ringer of filteredRingers"
-                  (click)="onRingerSelected(ringer, store)"
+
+                  <div *ngIf="sheet.signIns.length > 0 && filteredRingers.length === 0">
+                    <p class="text-success p-3">All Ringers have been assigned</p>
+                  </div>
+
+                  <div *ngIf="filteredRingers.length" class="p-1">
+                    <input #searchInput class="form-control" type="text" [(ngModel)]="formValue" placeholder="Filter" (keyup)="onFilter(formValue)"/>
+                  </div>
+                  <button *ngFor="let signIn of filteredRingers"
+                  (click)="onRingerSelected(signIn, store)"
                   ngbDropdownItem>
-                    {{ringer.fullName}}
+                    {{signIn.ringer.fullName}}
                   </button>
                 </div>
               </div>

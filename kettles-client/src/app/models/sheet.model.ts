@@ -7,7 +7,7 @@ export class Sheet {
   date: string;
   onCall: string = '';
   active: boolean;
-  signIns?: SignIn[] = [];
+  signIns: SignIn[] = [];
   sheetLocations: SheetLocation[];
 
   constructor(id: number, date: string) {

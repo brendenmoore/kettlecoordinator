@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map,} from 'rxjs/internal/operators';
+import { MOCK_USER_DATA } from 'src/app/mock-data/mock';
 import { mockRingers } from 'src/app/mock-data/ringers';
 import { Ringer } from 'src/app/models/ringer.model';
 import { SignIn } from 'src/app/models/signIn.model';
@@ -18,15 +19,15 @@ export class RingerSignInComponent implements OnInit {
   form = new FormControl();
   ringers: Ringer[] = [];
   filteredOptions: Observable<Ringer[]>;
-  signIns: SignIn[] = [];
+  signIns: SignIn[] = MOCK_USER_DATA.sheets[0].signIns;
   @Input() selectedStore: Store;
   @Output() ringerSelected = new EventEmitter<Ringer>();
 
   constructor(public ringerService: RingerService) { }
 
   ngOnInit() {
-    // this.getRingers();;
-    this.ringers = mockRingers;
+    // this.getRingers();
+    this.ringers = MOCK_USER_DATA.ringers;
     this.filteredOptions = this.form.valueChanges.pipe(
       startWith(''),
       map(value => typeof value === 'string' ? value : value.fullName),

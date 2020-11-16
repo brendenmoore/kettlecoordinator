@@ -1,9 +1,9 @@
-import { Ringer } from './ringer.model';
+import { SignIn } from './signIn.model';
 import { UserLocation } from './userLocation.model'
 
 export class SheetLocation extends UserLocation {
   ringerType: string = '';
-  ringer: Ringer = null;
+  signIn: SignIn = null;
   clockIn?: string;
   clockOut?: string;
   earnings?: string;

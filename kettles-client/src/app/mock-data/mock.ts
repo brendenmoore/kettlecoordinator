@@ -90,6 +90,7 @@ class MockData {
       id: 1,
       date: "November 21st",
       active: true,
+      signIns: [],
       sheetLocations: [
         {
           id: 1,
@@ -101,9 +102,9 @@ class MockData {
           averageEarnings: '',
           nickName: "New Walmart",
           locationNotes: 'here are some other notes',
-          active: true,
+          active: false,
           ringerType: '',
-          ringer: null,
+          signIn: null,
           sheetNotes: ''
         },
         {
@@ -118,7 +119,7 @@ class MockData {
           locationNotes: 'here are some notes',
           active: true,
           ringerType: '',
-          ringer: null,
+          signIn: null,
           sheetNotes: ''
         },
         {
@@ -133,7 +134,7 @@ class MockData {
           locationNotes: '',
           active: true,
           ringerType: '',
-          ringer: null,
+          signIn: null,
           sheetNotes: ''
 
         },
@@ -149,7 +150,7 @@ class MockData {
           locationNotes: '',
           active: true,
           ringerType: '',
-          ringer: null,
+          signIn: null,
           sheetNotes: ''
 
         },
@@ -165,7 +166,7 @@ class MockData {
           locationNotes: '',
           active: true,
           ringerType: '',
-          ringer: null,
+          signIn: null,
           sheetNotes: ''
 
         },
@@ -181,7 +182,7 @@ class MockData {
           locationNotes: '',
           active: true,
           ringerType: '',
-          ringer: null,
+          signIn: null,
           sheetNotes: ''
         },
       ],

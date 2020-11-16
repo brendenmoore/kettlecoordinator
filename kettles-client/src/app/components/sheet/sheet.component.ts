@@ -21,8 +21,9 @@ export class SheetComponent implements OnInit {
 
   sheet: Sheet = MOCK_USER_DATA.sheets[0];
   ringers: Ringer[] = MOCK_USER_DATA.ringers;
-  signIns: SignIn[];
-  filteredRingers: Ringer[];
+  activeLocations: SheetLocation[];
+  signIns: SignIn[] = this.sheet.signIns;
+  filteredRingers: SignIn[];
   formValue: string;
 
   //trying to focus input
@@ -31,27 +32,33 @@ export class SheetComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.filteredRingers = this.ringers;
+    this.onFilter('');
+    this.activeLocations = this.sheet.sheetLocations.filter(store => store.active);
   }
 
-  onRingerSelected(ringer: Ringer, store: SheetLocation){
-    store.ringer = ringer;
+  onRingerSelected(signIn: SignIn, store: SheetLocation){
+    if (store.signIn) {
+      store.signIn.isAssigned = false;
+    }
+    store.signIn = signIn;
+    signIn.isAssigned = true;
     this.resetFilter();
   }
 
   resetFilter() {
     this.formValue = '';
-    this.onFilter();
+    this.onFilter(this.formValue);
   }
 
   onRemoveRinger(store: SheetLocation){
-    store.ringer = null;
+    store.signIn.isAssigned = false;
+    store.signIn = null;
+    this.onFilter('');
   }
 
-  onFilter(){
-    const filterValue = this.formValue.toLowerCase();
-
-    this.filteredRingers = this.ringers.filter(ringer => ringer.fullName.toLowerCase().includes(filterValue));
+  onFilter(value: string){
+    const filterValue = value.toLowerCase();
+    this.filteredRingers = this.signIns.filter(signIn => signIn.ringer.fullName.toLowerCase().includes(filterValue) && !signIn.isAssigned);
   }
 
 }
