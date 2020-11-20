@@ -11,11 +11,19 @@ import { SheetService } from 'src/app/services/sheet.service';
 export class SheetSelectionComponent implements OnInit {
 
   sheets: Sheet[];
+  model: {
+    year: number,
+    month: number,
+    day: number
+  };
 
   constructor(private sheetService: SheetService, private router: Router) { }
 
   ngOnInit(): void {
     this.sheetService.findAll().subscribe(res => {
+      this.sheets = res;
+    });
+    this.sheetService.sheetAdded.subscribe(res => {
       this.sheets = res;
     })
   }
@@ -23,6 +31,10 @@ export class SheetSelectionComponent implements OnInit {
   goTo(sheet: Sheet){
     this.sheetService.activeId = sheet.id;
     this.router.navigateByUrl('/sheet');
+  }
+
+  addSheet() {
+    this.sheetService.add(this.model.month + "/" + this.model.day + "/" + this.model.year);
   }
 
 }

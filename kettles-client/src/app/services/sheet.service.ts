@@ -26,7 +26,7 @@ export class SheetService {
   }
 
   public add(date: string){
-    this.mockSheets.push(new Sheet(Date.now(), date));
+    this.mockSheets.unshift(new Sheet(Date.now(), date));
     this.sheetAdded.emit(this.mockSheets.slice());
   }
 
