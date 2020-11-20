@@ -22,7 +22,7 @@
         </form>
         <h2 class="pt-3">Select a date:</h2>
         <div class="list-group">
-          <a *ngFor="let sheet of sheets" class="list-group-item list-group-item-action" (click)="goTo(sheet)">{{sheet.date}}</a>
+          <button *ngFor="let sheet of sheets" class="list-group-item list-group-item-action" (click)="goTo(sheet)">{{sheet.date}}</button>
         </div>
       </div>
     </div>
