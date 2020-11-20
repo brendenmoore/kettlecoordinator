@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'logout', component: LogoutComponent},
   {path: 'ringers/new', component: AddRingerComponent},
   {path: 'sheets', component: SheetSelectionComponent},
-  {path: 'sheet', component: SheetComponent},
+  {path: 'sheets/:id', component: SheetComponent},
 ];
 
 @NgModule({

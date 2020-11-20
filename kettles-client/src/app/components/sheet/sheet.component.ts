@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Ringer } from 'src/app/models/ringer.model';
 import { Sheet } from 'src/app/models/sheet.model';
 import { SheetLocation } from 'src/app/models/sheetLocation.model';
@@ -23,13 +24,16 @@ export class SheetComponent implements OnInit {
   @ViewChild("searchInput") searchInput: ElementRef;
 
   constructor(private ringerService: RingerService,
-              private sheetService: SheetService) { }
+              private sheetService: SheetService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getRingers();
-    this.getSheet(this.sheetService.activeId);
-    this.sheetService.signInAdded.subscribe(res => {
-      this.sheet = res;
+    this.route.params.subscribe(params => {
+      this.getSheet(params['id']);
+    })
+    this.sheetService.signInAdded.subscribe(sheet => {
+      this.sheet = sheet;
       this.onFilter(this.formValue);
     })
     this.onFilter('');
@@ -44,7 +48,7 @@ export class SheetComponent implements OnInit {
 
   //temp
   getSheet(id: number){
-    this.sheet = this.sheetService.findById(id);
+    this.sheet = this.sheetService.findById(Number(id));
   }
 
   onRingerSelected(signIn: SignIn, store: SheetLocation){

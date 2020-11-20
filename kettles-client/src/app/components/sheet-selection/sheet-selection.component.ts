@@ -30,7 +30,7 @@ export class SheetSelectionComponent implements OnInit {
 
   goTo(sheet: Sheet){
     this.sheetService.activeId = sheet.id;
-    this.router.navigateByUrl('/sheet');
+    this.router.navigate(['/sheets', sheet.id]);
   }
 
   addSheet() {
