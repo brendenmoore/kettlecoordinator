@@ -6,6 +6,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { RingersComponent } from './components/ringers/ringers.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { AddRingerComponent } from './components/add-ringer/add-ringer.component';
+import { SheetSelectionComponent } from './components/sheet-selection/sheet-selection.component';
 import { SheetComponent } from './components/sheet/sheet.component';
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'ringers', component: RingersComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'ringers/new', component: AddRingerComponent},
-  {path: 'sheet', component: SheetComponent}
+  {path: 'sheets', component: SheetSelectionComponent},
+  {path: 'sheet', component: SheetComponent},
 ];
 
 @NgModule({

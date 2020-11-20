@@ -8,6 +8,7 @@ export class SheetService {
 
   sheetAdded = new EventEmitter<Sheet[]>();
   signInAdded = new EventEmitter<Sheet>();
+  activeId: number;
 
   private mockSheets: Sheet[] = [
     new Sheet(1, "November 21"),

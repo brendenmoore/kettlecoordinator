@@ -29,6 +29,7 @@ import { SheetComponent } from './components/sheet/sheet.component';
 import { RingerSignInComponent } from './components/ringer-sign-in/ringer-sign-in.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SheetService } from './services/sheet.service';
+import { SheetSelectionComponent } from './components/sheet-selection/sheet-selection.component';
 
 
 
@@ -47,6 +48,7 @@ import { SheetService } from './services/sheet.service';
     EditRingerComponent,
     SheetComponent,
     RingerSignInComponent,
+    SheetSelectionComponent,
   ],
   imports: [
     BrowserModule,

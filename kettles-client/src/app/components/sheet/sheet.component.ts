@@ -27,7 +27,7 @@ export class SheetComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRingers();
-    this.getSheet(1); // temp hardcoded ID
+    this.getSheet(this.sheetService.activeId);
     this.sheetService.signInAdded.subscribe(res => {
       this.sheet = res;
       this.onFilter(this.formValue);

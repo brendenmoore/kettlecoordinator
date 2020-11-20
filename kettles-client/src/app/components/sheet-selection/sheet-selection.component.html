@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="pt-3 w-25 mx-auto">
+        <h2>Select a date:</h2>
+        <div class="list-group">
+          <a *ngFor="let sheet of sheets" class="list-group-item list-group-item-action" (click)="goTo(sheet)">{{sheet.date}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
