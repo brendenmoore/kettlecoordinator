@@ -1,5 +1,5 @@
-<form *ngIf="ringers" class="example-form">
-  <mat-form-field class="mt-2 full-width">
+<form *ngIf="ringers">
+  <mat-form-field class="mt-2 w-100">
     <input
           type="text"
           placeholder="Sign In Ringers"
@@ -8,18 +8,12 @@
           matInput
           [formControl]="form"
           [matAutocomplete]="auto">
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="addSignIn()">
       <mat-option *ngFor="let ringer of filteredOptions | async" [value]="ringer">
         {{ringer.fullName}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <button class="btn" (click)="addSignIn()">
-    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-      <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-    </svg>
-  </button>
 </form>
 
 
