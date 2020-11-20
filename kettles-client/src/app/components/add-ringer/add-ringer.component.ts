@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RingerDTO } from 'src/app/DTO/ringerDTO';
 import { Ringer } from 'src/app/models/ringer.model';
 import { RingerService } from 'src/app/services/ringer.service';
 
@@ -11,20 +12,15 @@ import { RingerService } from 'src/app/services/ringer.service';
 })
 export class AddRingerComponent implements OnInit {
 
-  form = this.fb.group({
-    firstName: [''],
-    lastName: [''],
-    phoneNumber: ['']
-  });
-  ringer: Ringer = new Ringer();
 
-  constructor(private fb:FormBuilder, private ringerService:RingerService, private router:Router) {}
+  constructor(private ringerService:RingerService, private router:Router) {}
 
   ngOnInit(): void {
   }
 
-  submitForm() {
-    this.ringerService.add(this.ringer)
+  submitForm(firstName, lastName, phoneNumber) {
+    const ringer: RingerDTO = new RingerDTO(firstName, lastName, phoneNumber);
+    this.ringerService.add(ringer)
       .subscribe(
         () => {
             console.log("Ringer Added");

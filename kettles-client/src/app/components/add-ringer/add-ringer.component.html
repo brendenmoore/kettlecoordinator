@@ -2,17 +2,17 @@
   <form>
     <div class="form-group">
       <label for="firstName">First Name</label>
-      <input type="text" class="form-control" id="firstName" [(ngModel)]="ringer.firstName" name="first">
+      <input type="text" class="form-control" id="firstName" #firstName>
     </div>
     <div class="form-group">
       <label for="lastName">Last Name</label>
-      <input type="text" class="form-control" id="lastName" [(ngModel)]="ringer.lastName" name="last">
+      <input type="text" class="form-control" id="lastName" #lastName>
     </div>
     <div class="form-group">
       <label for="phoneNumber">Phone Number</label>
-      <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="ringer.phoneNumber" name="phone">
+      <input type="text" class="form-control" id="phoneNumber" #phoneNumber>
     </div>
-    <button type="submit" class="btn btn-primary" (click)="submitForm()">Submit</button>
+    <button type="submit" class="btn btn-primary" (click)="submitForm(firstName.value, lastName.value, phoneNumber.value)">Submit</button>
   </form>
 </div>
 

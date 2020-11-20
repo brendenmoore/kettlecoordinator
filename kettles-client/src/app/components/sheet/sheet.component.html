@@ -1,6 +1,6 @@
 <div>
   <div class="container sidebar">
-      <app-ringer-sign-in
+      <app-ringer-sign-in [sheet]="sheet"
       ></app-ringer-sign-in>
     </div>
     <div class="container main">
@@ -37,11 +37,11 @@
                     <p class="text-warning p-3">No ringers signed in</p>
                   </div>
 
-                  <div *ngIf="sheet.signIns.length > 0 && filteredRingers.length === 0">
-                    <p class="text-success p-3">All Ringers have been assigned</p>
+                  <div *ngIf="areAllAssigned() && !store.signIn && sheet.signIns.length">
+                    <p class="text-success p-3">All ringers have been assigned</p>
                   </div>
 
-                  <div *ngIf="filteredRingers.length" class="p-1">
+                  <div *ngIf="!areAllAssigned()" class="p-1">
                     <input #searchInput class="form-control" type="text" [(ngModel)]="formValue" placeholder="Filter" (keyup)="onFilter(formValue)"/>
                   </div>
                   <button *ngFor="let signIn of filteredRingers"

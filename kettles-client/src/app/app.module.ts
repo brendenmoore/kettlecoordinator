@@ -28,6 +28,7 @@ import { EditRingerComponent } from './components/edit-ringer/edit-ringer.compon
 import { SheetComponent } from './components/sheet/sheet.component';
 import { RingerSignInComponent } from './components/ringer-sign-in/ringer-sign-in.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SheetService } from './services/sheet.service';
 
 
 
@@ -66,6 +67,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule
   ],
   providers: [
+    SheetService,
     RingerService,
     {
       provide: HTTP_INTERCEPTORS,

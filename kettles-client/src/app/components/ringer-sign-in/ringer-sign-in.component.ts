@@ -2,12 +2,10 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map,} from 'rxjs/internal/operators';
-import { MOCK_USER_DATA } from 'src/app/mock-data/mock';
-import { mockRingers } from 'src/app/mock-data/ringers';
 import { Ringer } from 'src/app/models/ringer.model';
-import { SignIn } from 'src/app/models/signIn.model';
-import { Store } from 'src/app/models/store.model';
+import { Sheet } from 'src/app/models/sheet.model';
 import { RingerService } from 'src/app/services/ringer.service';
+import { SheetService } from 'src/app/services/sheet.service';
 
 @Component({
   selector: 'app-ringer-sign-in',
@@ -19,28 +17,22 @@ export class RingerSignInComponent implements OnInit {
   form = new FormControl();
   ringers: Ringer[] = [];
   filteredOptions: Observable<Ringer[]>;
-  signIns: SignIn[] = MOCK_USER_DATA.sheets[0].signIns;
-  @Input() selectedStore: Store;
-  @Output() ringerSelected = new EventEmitter<Ringer>();
+  @Input() sheet: Sheet;
 
-  constructor(public ringerService: RingerService) { }
+  constructor(private ringerService: RingerService, private sheetService: SheetService) { }
 
   ngOnInit() {
-    // this.getRingers();
-    this.ringers = MOCK_USER_DATA.ringers;
+    this.getRingers();
     this.filteredOptions = this.form.valueChanges.pipe(
       startWith(''),
       map(value => typeof value === 'string' ? value : value.fullName),
       map(name => name ? this._filter(name) : this.ringers.slice())
     );
-
-
   }
 
   getRingers(){
     this.ringerService.findAll().subscribe(res => {
       this.ringers = res;
-      console.log(res);
     });
   }
 
@@ -50,13 +42,13 @@ export class RingerSignInComponent implements OnInit {
 
   private _filter(value: string): Ringer[] {
     const filterValue = value.toLowerCase();
-
     return this.ringers.filter(ringer => ringer.fullName.toLowerCase().includes(filterValue));
   }
+
   addSignIn() {
     if(typeof this.form.value !== 'string') {
       const ringer = {... this.form.value};
-      this.signIns.push(new SignIn(ringer));
+      this.sheetService.addSignIn(this.sheet.id, ringer);
       this.form.reset("");
     }
   }

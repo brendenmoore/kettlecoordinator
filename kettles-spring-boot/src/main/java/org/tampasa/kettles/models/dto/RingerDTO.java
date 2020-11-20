@@ -9,12 +9,7 @@ public class RingerDTO {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private Long userId;
     private String notes;
-
-    public Long getUserId() {
-        return userId;
-    }
 
     public String getFirstName() {
         return firstName;

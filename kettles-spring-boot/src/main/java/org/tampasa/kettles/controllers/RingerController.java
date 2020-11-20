@@ -3,6 +3,10 @@ package org.tampasa.kettles.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import org.tampasa.kettles.models.Ringer;
 import org.tampasa.kettles.models.data.RingerRepository;
@@ -10,11 +14,12 @@ import org.tampasa.kettles.models.dto.RingerDTO;
 import org.tampasa.kettles.user.ApplicationUser;
 import org.tampasa.kettles.user.ApplicationUserRepository;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping(path = "/{userId}/ringers")
+@RequestMapping(path = "/ringers")
 @RestController
 public class RingerController {
 
@@ -25,8 +30,9 @@ public class RingerController {
     private RingerRepository ringerRepository;
 
     @GetMapping()
-    public List<Ringer> getAllRingers(@PathVariable("userId") Long userId ) {
-        return (List<Ringer>) userRepository.findById(userId).getRingers();
+    public List<Ringer> getAllRingers() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (List<Ringer>) userRepository.findByUsername(authentication.getPrincipal().toString()).getRingers();
     }
 
     @GetMapping("/{id}")
@@ -36,14 +42,9 @@ public class RingerController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> addRinger(@PathVariable("userId") Long userId, @RequestBody RingerDTO ringerDTO) {
-        if (!userId.equals(ringerDTO.getUserId())) {
-            return new ResponseEntity<>("Error, ringer not added. User Id doesn't match", HttpStatus.BAD_REQUEST);
-        }
-        if (userRepository.findById(ringerDTO.getUserId()) == null) {
-            return new ResponseEntity<>("Error, ringer not added. User Id does not exist", HttpStatus.BAD_REQUEST);
-        }
-        ApplicationUser user = userRepository.findById(userId);
+    public ResponseEntity<Object> addRinger(@RequestBody RingerDTO ringerDTO) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        ApplicationUser user = userRepository.findByUsername(authentication.getPrincipal().toString());
         Ringer ringer = new Ringer(ringerDTO.getFirstName(), ringerDTO.getLastName(), user, ringerDTO.getNotes(), ringerDTO.getPhoneNumber());
         user.addRinger(ringer);
         ringerRepository.save(ringer);

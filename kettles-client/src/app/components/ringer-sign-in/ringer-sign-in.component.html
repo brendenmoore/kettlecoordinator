@@ -24,8 +24,8 @@
 
 
 <div class="scrollable">
-  <table class="table" *ngIf="signIns">
-    <tr *ngFor="let signIn of signIns"
+  <table class="table" *ngIf="sheet.signIns">
+    <tr *ngFor="let signIn of sheet.signIns"
       [ngClass]="{'unassigned': !signIn.isAssigned, 'assigned': signIn.isAssigned}"
     >
       <td>{{signIn.ringer.fullName}}</td>

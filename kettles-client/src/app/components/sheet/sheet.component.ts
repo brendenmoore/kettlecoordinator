@@ -1,16 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/internal/operators';
-import { MOCK_USER_DATA } from 'src/app/mock-data/mock';
-import { mockRecords } from 'src/app/mock-data/records';
-import { mockRingers } from 'src/app/mock-data/ringers';
-import { mockStores } from 'src/app/mock-data/stores';
 import { Ringer } from 'src/app/models/ringer.model';
 import { Sheet } from 'src/app/models/sheet.model';
 import { SheetLocation } from 'src/app/models/sheetLocation.model';
 import { SignIn } from 'src/app/models/signIn.model';
-import { Store } from 'src/app/models/store.model';
+import { RingerService } from 'src/app/services/ringer.service';
+import { SheetService } from 'src/app/services/sheet.service';
 
 @Component({
   selector: 'app-sheet',
@@ -19,21 +13,38 @@ import { Store } from 'src/app/models/store.model';
 })
 export class SheetComponent implements OnInit {
 
-  sheet: Sheet = MOCK_USER_DATA.sheets[0];
-  ringers: Ringer[] = MOCK_USER_DATA.ringers;
+  sheet: Sheet;
+  ringers: Ringer[];
   activeLocations: SheetLocation[];
-  signIns: SignIn[] = this.sheet.signIns;
   filteredRingers: SignIn[];
-  formValue: string;
+  formValue: string = '';
 
   //trying to focus input
   @ViewChild("searchInput") searchInput: ElementRef;
 
-  constructor() { }
+  constructor(private ringerService: RingerService,
+              private sheetService: SheetService) { }
 
   ngOnInit(): void {
+    this.getRingers();
+    this.getSheet(1); // temp hardcoded ID
+    this.sheetService.signInAdded.subscribe(res => {
+      this.sheet = res;
+      this.onFilter(this.formValue);
+    })
     this.onFilter('');
     this.activeLocations = this.sheet.sheetLocations.filter(store => store.active);
+  }
+
+  getRingers(){
+    this.ringerService.findAll().subscribe(res => {
+      this.ringers = res;
+    });
+  }
+
+  //temp
+  getSheet(id: number){
+    this.sheet = this.sheetService.findById(id);
   }
 
   onRingerSelected(signIn: SignIn, store: SheetLocation){
@@ -56,9 +67,13 @@ export class SheetComponent implements OnInit {
     this.onFilter('');
   }
 
+  areAllAssigned() {
+    return this.sheet.signIns.filter(si => !si.isAssigned).length === 0;
+  }
+
   onFilter(value: string){
     const filterValue = value.toLowerCase();
-    this.filteredRingers = this.signIns.filter(signIn => signIn.ringer.fullName.toLowerCase().includes(filterValue) && !signIn.isAssigned);
+    this.filteredRingers = this.sheet.signIns.filter(signIn => signIn.ringer.fullName.toLowerCase().includes(filterValue) && !signIn.isAssigned);
   }
 
 }

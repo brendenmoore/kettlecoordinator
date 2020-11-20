@@ -3,11 +3,17 @@ import { Route } from '../models/route.model';
 import { Sheet } from '../models/sheet.model';
 import { UserLocation } from '../models/userLocation.model';
 import { mockRingers } from './ringers';
-import { mockRoutes } from './routes';
 
 class MockData {
   ringers: Ringer[] = [...mockRingers];
-  routes: Route[] = [...mockRoutes];
+  routes: Route[] = [
+    {
+      id: 1,
+      name: "Blue route",
+      color: 1,
+      active: true
+    }
+  ]
   userLocations: UserLocation[] = [
     {
       id: 1,
