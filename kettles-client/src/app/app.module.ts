@@ -33,6 +33,7 @@ import { SheetSelectionComponent } from './components/sheet-selection/sheet-sele
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/authGuard.service';
+import { CanDeactivateGuard } from './components/add-ringer/can-deactivate-guard.service';
 
 
 
@@ -76,6 +77,7 @@ import { AuthGuard } from './services/authGuard.service';
     SheetService,
     AuthService,
     AuthGuard,
+    CanDeactivateGuard,
     RingerService,
     {
       provide: HTTP_INTERCEPTORS,
