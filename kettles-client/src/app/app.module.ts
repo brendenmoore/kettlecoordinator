@@ -31,6 +31,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SheetService } from './services/sheet.service';
 import { SheetSelectionComponent } from './components/sheet-selection/sheet-selection.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/authGuard.service';
 
 
 
@@ -72,6 +74,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
   ],
   providers: [
     SheetService,
+    AuthService,
+    AuthGuard,
     RingerService,
     {
       provide: HTTP_INTERCEPTORS,

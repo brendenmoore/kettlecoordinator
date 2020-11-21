@@ -9,22 +9,24 @@ import { AddRingerComponent } from './components/add-ringer/add-ringer.component
 import { SheetSelectionComponent } from './components/sheet-selection/sheet-selection.component';
 import { SheetComponent } from './components/sheet/sheet.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AuthGuard } from './services/authGuard.service';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegistrationComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'ringers', component: RingersComponent},
+  {path: 'home', canActivate:[AuthGuard], component: HomeComponent},
+  {path: 'ringers', canActivate:[AuthGuard], component: RingersComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'ringers/new', component: AddRingerComponent},
-  {path: 'sheets', component: SheetSelectionComponent},
-  {path: 'sheets/:id', component: SheetComponent},
+  {path: 'ringers/new', canActivate:[AuthGuard], component: AddRingerComponent},
+  {path: 'sheets', canActivate:[AuthGuard], component: SheetSelectionComponent},
+  {path: 'sheets/:id', canActivate:[AuthGuard], component: SheetComponent},
   {path: 'page-not-found', component: PageNotFoundComponent},
   {path: '**', redirectTo: '/page-not-found'}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

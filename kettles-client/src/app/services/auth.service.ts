@@ -5,9 +5,7 @@ import {tap, shareReplay} from 'rxjs/internal/operators';
 import * as dayjs from 'dayjs'
 dayjs().format()
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
   SIGN_UP_URL = 'api/users/sign-up'
