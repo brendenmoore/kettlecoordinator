@@ -8,6 +8,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { AddRingerComponent } from './components/add-ringer/add-ringer.component';
 import { SheetSelectionComponent } from './components/sheet-selection/sheet-selection.component';
 import { SheetComponent } from './components/sheet/sheet.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -18,6 +19,8 @@ const routes: Routes = [
   {path: 'ringers/new', component: AddRingerComponent},
   {path: 'sheets', component: SheetSelectionComponent},
   {path: 'sheets/:id', component: SheetComponent},
+  {path: 'page-not-found', component: PageNotFoundComponent},
+  {path: '**', redirectTo: '/page-not-found'}
 ];
 
 @NgModule({

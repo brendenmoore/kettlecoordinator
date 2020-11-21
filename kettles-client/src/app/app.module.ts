@@ -30,6 +30,7 @@ import { RingerSignInComponent } from './components/ringer-sign-in/ringer-sign-i
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SheetService } from './services/sheet.service';
 import { SheetSelectionComponent } from './components/sheet-selection/sheet-selection.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 
@@ -49,6 +50,7 @@ import { SheetSelectionComponent } from './components/sheet-selection/sheet-sele
     SheetComponent,
     RingerSignInComponent,
     SheetSelectionComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

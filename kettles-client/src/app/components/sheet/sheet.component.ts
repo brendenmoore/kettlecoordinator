@@ -48,7 +48,7 @@ export class SheetComponent implements OnInit {
 
   //temp
   getSheet(id: number){
-    this.sheet = this.sheetService.findById(Number(id));
+    this.sheet = this.sheetService.findById(+id);
   }
 
   onRingerSelected(signIn: SignIn, store: SheetLocation){
