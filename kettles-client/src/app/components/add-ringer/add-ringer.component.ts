@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { RingerDTO } from 'src/app/DTO/ringerDTO';
@@ -14,9 +14,6 @@ import { CanComponentDeactivate } from './can-deactivate-guard.service';
 })
 export class AddRingerComponent implements OnInit, CanComponentDeactivate {
 
-  firstName = '';
-  lastName = '';
-  phoneNumber = '';
   changesSaved: boolean = false;
 
   constructor(private ringerService:RingerService, private router:Router) {}
@@ -24,8 +21,9 @@ export class AddRingerComponent implements OnInit, CanComponentDeactivate {
   ngOnInit(): void {
   }
 
-  submitForm() {
-    const ringer: RingerDTO = new RingerDTO(this.firstName, this.lastName, this.phoneNumber);
+  onSubmit(form: NgForm) {
+    console.log(form)
+    const ringer: RingerDTO = new RingerDTO(form.value.firstName, form.value.lastName, form.value.phoneNumber);
     this.ringerService.add(ringer)
       .subscribe(
         () => {
