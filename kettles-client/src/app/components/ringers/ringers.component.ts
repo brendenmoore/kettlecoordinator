@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Ringer } from 'src/app/models/ringer.model';
 import { RingerService } from 'src/app/services/ringer.service';
 
@@ -9,9 +10,10 @@ import { RingerService } from 'src/app/services/ringer.service';
 })
 export class RingersComponent implements OnInit {
 
-  ringers: Ringer[] = [];
+  ringers: Ringer[];
   columnsToDisplay: string[] = ['firstName', 'lastName'];
   selected: Ringer = null;
+  isLoading: boolean = false;
 
   constructor(public ringerService: RingerService) { }
 
@@ -20,9 +22,11 @@ export class RingersComponent implements OnInit {
   }
 
   getRingers(){
-    this.ringerService.findAll().subscribe(res => {
-      this.ringers.push(...res);
-    })
+    this.isLoading = true;
+    this.ringerService.findAll().subscribe(ringers => {
+      this.isLoading = false;
+      this.ringers = ringers;
+    });
   }
 
 

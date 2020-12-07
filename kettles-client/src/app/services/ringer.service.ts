@@ -64,16 +64,18 @@ export class RingerService {
   }
 
   public findAll(): Observable<Ringer[]> {
-    // return this.http.get<Ringer[]>("api/ringers");
-    return new Observable((observer) => {observer.next(this.mockRingers)})
+    console.log("find all called");
+    console.log();
+    return this.http.get<Ringer[]>("api/ringers");
+    // return new Observable((observer) => {observer.next(this.mockRingers)})
   }
 
   public add(ringerDTO: RingerDTO) {
-    // return this.http.post<RingerDTO>("api/ringers", ringerDTO);
-    return new Observable((observer) => {
-      this.mockRingers.push(new Ringer(ringerDTO.firstName, ringerDTO.lastName, ringerDTO.phoneNumber));
-      observer.next(this.mockRingers)
-    })
+    return this.http.post<RingerDTO>("api/ringers", ringerDTO);
+    // return new Observable((observer) => {
+    //   this.mockRingers.push(new Ringer(ringerDTO.firstName, ringerDTO.lastName, ringerDTO.phoneNumber));
+    //   observer.next(this.mockRingers)
+    // })
 
   }
 

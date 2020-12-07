@@ -13,8 +13,8 @@
     <h1 class="my-3">Ringers</h1>
 
     <button type="button" class="btn btn-primary mb-3" routerLink="/ringers/new">Add Ringer</button>
-
-    <table class="table">
+    <p *ngIf="isLoading">Loading...</p>
+    <table class="table" *ngIf="!isLoading && ringers.length >= 1">
       <thead>
         <tr>
           <th scope="col">First</th>
