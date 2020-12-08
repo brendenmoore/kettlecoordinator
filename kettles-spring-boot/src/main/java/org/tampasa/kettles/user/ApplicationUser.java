@@ -7,9 +7,7 @@ import org.tampasa.kettles.models.Sheet;
 import org.tampasa.kettles.models.Template;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class ApplicationUser {
@@ -64,6 +62,10 @@ public class ApplicationUser {
 
     public void setRingers(List<Ringer> ringers) {
         this.ringers = ringers;
+    }
+
+    public Boolean removeRingerById(int id){
+        return this.ringers.removeIf(ringer -> ringer.getId() == id);
     }
 
     public void addRinger(Ringer ringer) {
