@@ -1,14 +1,4 @@
-
-
-<mat-drawer-container>
-  <mat-drawer #drawer class="example-sidenav" mode="side" *ngIf="selected">
-    <h2>{{selected.firstName + " " + selected.lastName}}</h2>
-    <p>Phone Number: {{selected.phoneNumber}}</p>
-    <p>Other Information</p>
-    <button type="button" class="btn btn-light">Edit</button>
-  </mat-drawer>
-
-  <div class="container">
+<div class="container">
 
     <h1 class="my-3">Ringers</h1>
 
@@ -20,18 +10,21 @@
           <th scope="col">First</th>
           <th scope="col">Last</th>
           <th scope="col">Phone Number</th>
+          <th scope="col">Options</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ringer of ringers" (click)="selected = ringer; drawer.toggle();">
+        <tr *ngFor="let ringer of ringers">
           <td>{{ringer.firstName}}</td>
           <td>{{ringer.lastName}}</td>
           <td>{{ringer.phoneNumber}}</td>
+          <td>
+            <button class="btn btn-small btn-light" (click)="onDelete(ringer)">Delete</button>
+            <a class="btn btn-small btn-light" [routerLink]="['edit/', ringer.id]">Edit</a>
+          </td>
         </tr>
       </tbody>
     </table>
 
 
   </div>
-
-</mat-drawer-container>

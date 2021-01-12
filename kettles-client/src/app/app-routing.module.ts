@@ -20,6 +20,7 @@ const routes: Routes = [
   {path: 'ringers', canActivate:[AuthGuard], component: RingersComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'ringers/new', canActivate:[AuthGuard], canDeactivate:[CanDeactivateGuard], component: AddRingerComponent},
+  {path: 'ringers/edit/:id', canActivate:[AuthGuard], component: AddRingerComponent},
   {path: 'sheets', canActivate:[AuthGuard], component: SheetSelectionComponent},
   {path: 'sheets/:id', canActivate:[AuthGuard], component: SheetComponent},
   {path: 'page-not-found', component: PageNotFoundComponent},

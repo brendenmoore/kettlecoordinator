@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Ringer } from '../models/ringer.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { RingerDTO } from '../DTO/ringerDTO';
+import { RingersComponent } from '../components/ringers/ringers.component';
+import { map } from 'rxjs/internal/operators';
 
 
 @Injectable({
@@ -12,7 +14,7 @@ export class RingerService {
 
   private mockRingers: Ringer[] = [
     {
-      id: 1,
+      id: "1",
       active: true,
       fullName: "Brenden Moore",
       firstName: "Brenden",
@@ -21,7 +23,7 @@ export class RingerService {
       notes: ""
     },
     {
-      id: 2,
+      id: "2",
       active: true,
       fullName: "Sarah Moore",
       firstName: "Sarah",
@@ -30,7 +32,7 @@ export class RingerService {
       notes: "",
     },
     {
-      id: 3,
+      id: "3",
       active: true,
       fullName: "Bat Man",
       firstName: "Bat",
@@ -39,7 +41,7 @@ export class RingerService {
       notes: "darkness, no parents",
     },
     {
-      id: 4,
+      id: "4",
       active: true,
       fullName: "Donald Glover",
       firstName: "Donald",
@@ -48,7 +50,7 @@ export class RingerService {
       notes: "",
     },
     {
-      id: 4,
+      id: "4",
       active: true,
       fullName: "A Longer Name Goes Here",
       firstName: "A Longer",
@@ -57,26 +59,65 @@ export class RingerService {
       notes: "",
     },
   ];
-
+  private ringersUpdated = new Subject<Ringer[]>();
   private ringersURL: string;
+  private ringers: Ringer[] = [];
 
   constructor(private http: HttpClient) {
   }
 
-  public findAll(): Observable<Ringer[]> {
-    console.log("find all called");
-    console.log();
-    return this.http.get<Ringer[]>("api/ringers");
-    // return new Observable((observer) => {observer.next(this.mockRingers)})
+  public getRingerUpdateListener() {
+    return this.ringersUpdated.asObservable();
   }
 
-  public add(ringerDTO: RingerDTO) {
-    return this.http.post<RingerDTO>("api/ringers", ringerDTO);
-    // return new Observable((observer) => {
-    //   this.mockRingers.push(new Ringer(ringerDTO.firstName, ringerDTO.lastName, ringerDTO.phoneNumber));
-    //   observer.next(this.mockRingers)
-    // })
+  public fetchRingers() {
+    this.http.get<{message: String, ringers: any}>("http://localhost:3000/api/ringers")
+      .pipe(map((body) => {
+        return body.ringers.map(ringer => {
+          return {
+            firstName: ringer.firstName,
+            lastName: ringer.lastName,
+            phoneNumber: ringer.phoneNumber,
+            fullName: ringer.firstName + " " + ringer.lastName,
+            id: ringer._id
+          }
+        })
+      }))
+      .subscribe((ringers) => {
+        this.ringers = ringers;
+        this.ringersUpdated.next([...this.ringers]);
+      });
+  }
 
+  public getRinger(id: string): Ringer{
+    return {...this.ringers.find(r => r.id == id)}
+  }
+
+  public add(ringerDTO: RingerDTO){
+    this.http.post<Ringer>("http://localhost:3000/api/ringers", ringerDTO)
+      .subscribe(ringer => {
+        this.ringers.push(ringer);
+        this.ringersUpdated.next([...this.ringers])
+      });
+  }
+
+  public update(id: string, ringerDTO: RingerDTO) {
+    const ringer = {
+      ...ringerDTO,
+      id: id
+    }
+    console.log(ringer)
+    this.http.put("http://localhost:3000/api/ringers/" + id, ringer)
+      .subscribe(res => console.log(res));
+  }
+
+  public delete(ringer: Ringer): void {
+    this.http.delete("http://localhost:3000/api/ringers/" + ringer.id)
+      .subscribe(() => {
+        const updatedRingers = this.ringers.filter(aRinger => aRinger.id !== ringer.id);
+        this.ringers = updatedRingers;
+        this.ringersUpdated.next([...this.ringers]);
+      })
   }
 
 }

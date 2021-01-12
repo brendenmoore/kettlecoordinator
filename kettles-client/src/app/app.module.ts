@@ -7,7 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { HttpInterceptorService } from './services/http-interceptor.service';
+// import { HttpInterceptorService } from './services/http-interceptor.service';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { RingersComponent } from './components/ringers/ringers.component';
@@ -74,12 +74,12 @@ import { CanDeactivateGuard } from './components/add-ringer/can-deactivate-guard
     AuthService,
     AuthGuard,
     CanDeactivateGuard,
-    RingerService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptorService,
-      multi: true
-    }
+    RingerService
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HttpInterceptorService,
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent]
 })

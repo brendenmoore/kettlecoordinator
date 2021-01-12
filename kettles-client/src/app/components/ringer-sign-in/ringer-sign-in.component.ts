@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { startWith, map,} from 'rxjs/internal/operators';
 import { Ringer } from 'src/app/models/ringer.model';
 import { Sheet } from 'src/app/models/sheet.model';
@@ -12,11 +12,13 @@ import { SheetService } from 'src/app/services/sheet.service';
   templateUrl: './ringer-sign-in.component.html',
   styleUrls: ['./ringer-sign-in.component.css']
 })
-export class RingerSignInComponent implements OnInit {
+export class RingerSignInComponent implements OnInit, OnDestroy {
 
   form = new FormControl();
   ringers: Ringer[] = [];
   filteredOptions: Observable<Ringer[]>;
+  private ringerSub: Subscription;
+  isLoading: boolean = false;
   @Input() sheet: Sheet;
 
   constructor(private ringerService: RingerService, private sheetService: SheetService) { }
@@ -30,10 +32,18 @@ export class RingerSignInComponent implements OnInit {
     );
   }
 
+  ngOnDestroy(): void {
+    this.ringerSub.unsubscribe();
+  }
+
   getRingers(){
-    this.ringerService.findAll().subscribe(res => {
-      this.ringers = res;
-    });
+    this.isLoading = true;
+    this.ringerService.fetchRingers();
+    this.ringerSub = this.ringerService.getRingerUpdateListener()
+      .subscribe(ringers => {
+        this.isLoading = false;
+        this.ringers = ringers;
+      });
   }
 
   displayFn(ringer: Ringer): string {

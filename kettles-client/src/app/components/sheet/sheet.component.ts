@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Ringer } from 'src/app/models/ringer.model';
 import { Sheet } from 'src/app/models/sheet.model';
 import { SheetLocation } from 'src/app/models/sheetLocation.model';
@@ -12,13 +13,15 @@ import { SheetService } from 'src/app/services/sheet.service';
   templateUrl: './sheet.component.html',
   styleUrls: ['./sheet.component.css']
 })
-export class SheetComponent implements OnInit {
+export class SheetComponent implements OnInit, OnDestroy {
 
   sheet: Sheet;
   ringers: Ringer[];
   activeLocations: SheetLocation[];
   filteredRingers: SignIn[];
   formValue: string = '';
+  ringerSub: Subscription;
+  isLoading: boolean = false;
 
   //trying to focus input
   @ViewChild("searchInput") searchInput: ElementRef;
@@ -40,10 +43,18 @@ export class SheetComponent implements OnInit {
     this.activeLocations = this.sheet.sheetLocations.filter(store => store.active);
   }
 
+  ngOnDestroy(): void {
+    this.ringerSub.unsubscribe();
+  }
+
   getRingers(){
-    this.ringerService.findAll().subscribe(res => {
-      this.ringers = res;
-    });
+    this.isLoading = true;
+    this.ringerService.fetchRingers();
+    this.ringerSub = this.ringerService.getRingerUpdateListener()
+      .subscribe(ringers => {
+        this.isLoading = false;
+        this.ringers = ringers;
+      });
   }
 
   //temp

@@ -1,5 +1,5 @@
 export class Ringer {
-  id: number;
+  id: string;
   fullName: string;
   firstName: string;
   lastName: string;
@@ -12,7 +12,7 @@ export class Ringer {
     this.lastName = lastName;
     this.fullName = firstName + " " + lastName;
     this.phoneNumber = phoneNumber;
-    this.id = Date.now();
+    this.id = null;
     this.notes = '';
     this.active = true;
   }

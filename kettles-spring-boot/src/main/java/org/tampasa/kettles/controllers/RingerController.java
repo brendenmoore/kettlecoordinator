@@ -64,6 +64,7 @@ public class RingerController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteRinger(@PathVariable("id") Integer id) {
+        System.out.println("here at delete method");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         ApplicationUser user = userRepository.findByUsername(authentication.getPrincipal().toString());
         Boolean removed = user.removeRingerById(id);
